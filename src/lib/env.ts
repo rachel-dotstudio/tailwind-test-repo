@@ -4,17 +4,28 @@
  * Imported through src/app/page.tsx
  * @see https://x.com/mattpocockuk/status/1760991147793449396
  */
+
+import dotenv from 'dotenv';
 import { z } from 'zod';
 
-const envVariables = z.object({
-  NEXT_PUBLIC_SHOW_LOGGER: z.enum(['true', 'false']).optional(),
+// Load environment variables from .env file
+dotenv.config();
+
+// Define the schema for your environment variables
+const envSchema = z.object({
+  NODE_ENV: z.string().optional().default('development'),
+  // NEXT_PUBLIC_API_URL: z.string().url(),
+  // Add other environment variables here
 });
 
-envVariables.parse(process.env);
+// Validate the environment variables
+const env = envSchema.safeParse(process.env);
 
-declare global {
-  namespace NodeJS {
-    // eslint-disable-next-line @typescript-eslint/no-empty-interface
-    interface ProcessEnv extends z.infer<typeof envVariables> {}
-  }
+if (!env.success) {
+  throw new Error(
+    `Invalid environment variables: ${JSON.stringify(env.error.format())}`,
+  );
 }
+
+// Export the validated environment variables
+export const ENV = env.data;

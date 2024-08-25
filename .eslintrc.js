@@ -17,14 +17,13 @@ module.exports = {
     'no-console': 'warn',
     '@typescript-eslint/explicit-module-boundary-types': 'off',
     'react/no-unescaped-entities': 'off',
-
     'react/display-name': 'off',
     'react/jsx-curly-brace-presence': [
       'warn',
       { props: 'never', children: 'never' },
     ],
 
-    //#region  //*=========== Unused Import ===========
+    // Unused Import Rules
     '@typescript-eslint/no-unused-vars': 'off',
     'unused-imports/no-unused-imports': 'warn',
     'unused-imports/no-unused-vars': [
@@ -36,29 +35,28 @@ module.exports = {
         argsIgnorePattern: '^_',
       },
     ],
-    //#endregion  //*======== Unused Import ===========
 
-    //#region  //*=========== Import Sort ===========
+    // Import Sort Rules
     'simple-import-sort/exports': 'warn',
     'simple-import-sort/imports': [
       'warn',
       {
         groups: [
-          // ext library & side effect imports
+          // External libraries & side effect imports
           ['^@?\\w', '^\\u0000'],
           // {s}css files
           ['^.+\\.s?css$'],
           // Lib and hooks
           ['^@/lib', '^@/hooks'],
-          // static data
+          // Static data
           ['^@/data'],
-          // components
+          // Components
           ['^@/components', '^@/container'],
-          // zustand store
+          // Zustand store
           ['^@/store'],
           // Other imports
           ['^@/'],
-          // relative paths up until 3 level
+          // Relative paths up to 3 levels
           [
             '^\\./?$',
             '^\\.(?!/?$)',
@@ -69,13 +67,13 @@ module.exports = {
             '^\\.\\./\\.\\./\\.\\./?$',
             '^\\.\\./\\.\\./\\.\\.(?!/?$)',
           ],
+          // Types
           ['^@/types'],
-          // other that didnt fit in
+          // Other imports that didn’t fit in
           ['^'],
         ],
       },
     ],
-    //#endregion  //*======== Import Sort ===========
   },
   globals: {
     React: true,

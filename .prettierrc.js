@@ -1,7 +1,20 @@
-module.exports = {
+const prettierConfig = {
   arrowParens: 'always',
   singleQuote: true,
   jsxSingleQuote: true,
   tabWidth: 2,
   semi: true,
+  trailingComma: 'all',
+  printWidth: 80,
+  plugins: [require('prettier-plugin-import-sort')],
+  importOrder: [
+    '^react(.*)$',
+    '^next(.*)$',
+    '<THIRD_PARTY_MODULES>',
+    '^@/components/(.*)$',
+    '^@/lib/(.*)$',
+    '^[./]',
+  ],
+  importOrderSeparation: true,
+  importOrderSortSpecifiers: true,
 };
